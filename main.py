@@ -38,8 +38,6 @@ async def marceau(ctx: discord.ApplicationContext):
         for member in voice_channels.members:
             members_list.append(str(member))
 
-    members_list.append("soct (Scot)")
-
     if len(members_list) == 0:
         await ctx.respond("There is not player in the voice channel")
         return
@@ -100,7 +98,6 @@ async def delete_voice_channel(ctx, channel_name):
 
 def get_member_by_nickname(guild, nickname):
     for member in guild.members:
-        print(member.nick, "|", member, "|", nickname)
         if member.nick == nickname:
             return member
     return None
