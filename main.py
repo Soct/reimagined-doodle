@@ -9,7 +9,7 @@ bot = discord.Bot()
 
 prefix = "doodle"
 users = set()
-
+last_chan = None
 @bot.event
 async def on_ready():
     print(f"{bot.user} is ready and online!")
@@ -25,22 +25,32 @@ async def help(ctx: discord.ApplicationContext):
 @bot.slash_command(name="clean", description="Clean all channels created by me")
 async def delete_toot_channels(ctx: discord.ApplicationContext):
     for user in users:
-        await move_user_by_username(ctx.guild, user, "Vocal")
+        print(f"Last chan '{last_chan}'")
+        await move_user_by_username(ctx.guild, user, last_chan)
+        print(f"User moved: {user}")
 
     for channel in ctx.guild.channels:
         if channel.name.startswith(prefix):
             await channel.delete()
             print(f"Deleted channel: {channel.name}")
-    await ctx.send("All channels deleted.")
+    await ctx.respond("All channels deleted.")
 
 @bot.slash_command(name="randomize", description="Randomize the channel you are in")
 async def randomize(ctx: discord.ApplicationContext):
-    voice_channel_list = ctx.guild.voice_channels
+    global last_chan
+    #voice_channel_list = ctx.author.guild.voice_channels
+    voice_channel = ctx.author.voice.channel
+    print(voice_channel)
+    last_chan = voice_channel.name
     members_list = []
-    for voice_channels in voice_channel_list:
-        for member in voice_channels.members:
-            members_list.append(str(member))
-            users.add(extract_username(str(member)))
+    #for voice_channels in voice_channel_list:
+    for member in voice_channel.members:
+        #last_chan = voice_channels.name
+        members_list.append(str(member))
+        users.add(extract_username(str(member)))
+
+    print(last_chan)
+    #await ctx.send(last_chan)
 
     if len(members_list) == 0:
         await ctx.respond("There is not player in the voice channel")
