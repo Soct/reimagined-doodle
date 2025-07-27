@@ -18,8 +18,11 @@ async def help(ctx: discord.ApplicationContext):
     await ctx.respond("Hey2!")
 
 @bot.slash_command(name="marceau", description="Say hello to the bot")
-async def help(ctx: discord.ApplicationContext):
-    await ctx.respond("Hey2!")
+async def marceau(ctx: discord.ApplicationContext):
+    voice_channel_list = ctx.guild.voice_channels
+    for voice_channels in voice_channel_list:
+        for member in voice_channels.members:
+            print(member)
 
 @bot.slash_command(name="tchoupinax", description="Say hello to the bot")
 async def help(ctx: discord.ApplicationContext):
