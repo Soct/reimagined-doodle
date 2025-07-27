@@ -78,13 +78,17 @@ def extract_nickname(name):
     match = re.search(r'\((.*?)\)', name)
     return match.group(1) if match else None
 
+def extract_username(name):
+    match = re.match(r'^(\S+)\s+\(.*\)', name)
+    return match.group(1) if match else None
+
 async def create_vc_and_move(ctx, channel_name, members):
     guild = ctx.guild
 
-    channel = await guild.create_voice_channel(name=channel_name)
+    await guild.create_voice_channel(name=channel_name)
 
     for member in members:
-        await move_user_by_username(ctx.guild, "tchoupinax", channel_name)
+        await move_user_by_username(ctx.guild, extract_username(member), channel_name)
 
 async def delete_voice_channel(ctx, channel_name):
     guild = ctx.guild
@@ -119,15 +123,11 @@ async def move_user_by_username(guild: discord.Guild, username: str, target_chan
         print(f"User '{username}' is not connected to any voice channel.")
         return
     
-    print("JO", target_channel_name)
-
     # Find the target voice channel
     target_channel = discord.utils.get(guild.voice_channels, name=target_channel_name)
     if not target_channel:
         return f"Voice channel '{target_channel_name}' not found."
     
-    print("OK")
-
     # Move the member
     await member.move_to(target_channel)
     return f"Moved {member.display_name} to {target_channel.name}."
