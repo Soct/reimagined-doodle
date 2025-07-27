@@ -19,7 +19,7 @@ async def hello(ctx: discord.ApplicationContext):
 
 @bot.slash_command(name="help", description="Say hello to the bot")
 async def help(ctx: discord.ApplicationContext):
-    await ctx.respond("Hey2!")
+    await ctx.respond("WIP")
 
 @bot.slash_command(name="clean", description="Clean all channels created by me")
 async def delete_toot_channels(ctx):
