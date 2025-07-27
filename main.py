@@ -33,8 +33,6 @@ async def delete_toot_channels(ctx):
             print(f"Deleted channel: {channel.name}")
     await ctx.send("All channels deleted.")
 
-    return
-
 @bot.slash_command(name="randomize", description="Randomize the channel you are in")
 async def marceau(ctx: discord.ApplicationContext):
     voice_channel_list = ctx.guild.voice_channels
