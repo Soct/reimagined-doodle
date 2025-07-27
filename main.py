@@ -23,7 +23,7 @@ async def help(ctx: discord.ApplicationContext):
     await ctx.respond("WIP")
 
 @bot.slash_command(name="clean", description="Clean all channels created by me")
-async def delete_toot_channels(ctx):
+async def delete_toot_channels(ctx: discord.ApplicationContext):
     for user in users:
         await move_user_by_username(ctx.guild, user, "Vocal")
 
@@ -34,7 +34,7 @@ async def delete_toot_channels(ctx):
     await ctx.send("All channels deleted.")
 
 @bot.slash_command(name="randomize", description="Randomize the channel you are in")
-async def marceau(ctx: discord.ApplicationContext):
+async def randomize(ctx: discord.ApplicationContext):
     voice_channel_list = ctx.guild.voice_channels
     members_list = []
     for voice_channels in voice_channel_list:
