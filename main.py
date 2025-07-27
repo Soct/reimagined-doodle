@@ -8,6 +8,7 @@ load_dotenv()
 bot = discord.Bot()
 
 prefix = "doodle"
+users = set()
 
 @bot.event
 async def on_ready():
@@ -23,11 +24,15 @@ async def help(ctx: discord.ApplicationContext):
 
 @bot.slash_command(name="clean", description="Clean all channels created by me")
 async def delete_toot_channels(ctx):
+    for user in users:
+        await move_user_by_username(ctx.guild, user, "Vocal")
+
     for channel in ctx.guild.channels:
         if channel.name.startswith(prefix):
             await channel.delete()
             print(f"Deleted channel: {channel.name}")
     await ctx.send("All channels deleted.")
+
     return
 
 @bot.slash_command(name="randomize", description="Randomize the channel you are in")
@@ -37,6 +42,7 @@ async def marceau(ctx: discord.ApplicationContext):
     for voice_channels in voice_channel_list:
         for member in voice_channels.members:
             members_list.append(str(member))
+            users.add(extract_username(str(member)))
 
     members_list.append("soct (Soct)")
 
