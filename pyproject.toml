@@ -5,3 +5,16 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
+
+[tool.uv.workspace]
+members = [
+    ".",
+]
+
+[tool.uv.sources]
+reimagined-doodle = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "reimagined-doodle",
+]

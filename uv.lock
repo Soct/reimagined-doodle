@@ -1,0 +1,18 @@
+version = 1
+revision = 2
+requires-python = ">=3.12"
+
+[[package]]
+name = "reimagined-doodle"
+version = "0.1.0"
+source = { virtual = "." }
+
+[package.dev-dependencies]
+dev = [
+    { name = "reimagined-doodle" },
+]
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+dev = [{ name = "reimagined-doodle", virtual = "." }]
