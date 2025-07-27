@@ -2,6 +2,9 @@
 Discord bot random team for lol 5v5
 
 A discord bot that randomize people into a even equip.
+
+Input : 
+
 ```
 /randomize [voice channel name]
 ```
