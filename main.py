@@ -42,8 +42,6 @@ async def marceau(ctx: discord.ApplicationContext):
             members_list.append(str(member))
             users.add(extract_username(str(member)))
 
-    members_list.append("soct (Soct)")
-
     if len(members_list) == 0:
         await ctx.respond("There is not player in the voice channel")
         return
