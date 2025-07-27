@@ -24,20 +24,4 @@ async def marceau(ctx: discord.ApplicationContext):
         for member in voice_channels.members:
             print(member)
 
-@bot.slash_command(name="tchoupinax", description="Say hello to the bot")
-async def help(ctx: discord.ApplicationContext):
-    await ctx.defer()
-
-    channel = discord.utils.get(ctx.guild.voice_channels, name="Vocal")
-
-    if not channel:
-        await ctx.respond("Channel 'Vocal' not found.")
-        return
-
-    members_array = []
-    for member in ctx.guild.members:
-        members_array.append(member.display_name)
-
-    await ctx.respond(f"Members in #Vocal2: {', '.join(members_array)}")
-
 bot.run(os.getenv('TOKEN')) # run the bot with the token
